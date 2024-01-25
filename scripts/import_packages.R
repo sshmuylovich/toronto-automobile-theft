@@ -10,8 +10,6 @@
 #### Workspace setup ####
 install.packages("rmarkdown") 
 install.packages("here") 
-install.packages("modelsummary") 
-install.packages("palmerpenguins") 
 install.packages("rstanarm") 
 install.packages("tidyverse") 
 install.packages("opendatatoronto") 
