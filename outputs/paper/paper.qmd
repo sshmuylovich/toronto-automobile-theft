@@ -1,0 +1,128 @@
+---
+title: "My title"
+subtitle: "My subtitle if needed"
+author: 
+  - First author
+  - Another author
+thanks: "Code and data are available at: LINK."
+date: today
+date-format: long
+abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
+format: pdf
+toc: true
+number-sections: true
+bibliography: references.bib
+---
+
+```{r}
+#| include: false
+#| warning: false
+#| message: false
+#### Preamble ####
+# Purpose: ....
+# Author: Sima Shmuylovich
+# Date: 25 January 2024
+# Contact: sima.shmuylovich@mail.utoronto.ca
+# License: MIT
+# Pre-requisites: Run "import_packages.R", "01-download_data.R", and
+# "02-data_cleaning.R"
+```
+
+```{r}
+#| include: false
+#| warning: false
+#| message: false
+
+library("tidyverse") 
+library("knitr") 
+library("opendatatoronto")
+library("janitor") 
+library("dplyr")
+library("ggplot2") 
+library("sf") 
+library("patchwork")
+```
+
+
+# Introduction
+
+# Data {#sec-data}
+
+# Results
+```{r}
+#| include: false
+#| warning: false
+#| message: false
+
+map_data <- readRDS("../data/cleaned_map_data.rds") 
+map_data_csv <- read_csv("../data/cleaned_map_data.csv") %>%
+  filter(!is.na(num_automobile_thefts))
+
+global_min <- min(map_data_csv$num_automobile_thefts)
+global_max<- max(map_data_csv$num_automobile_thefts)
+
+create_plot <- function(attribute, year) {
+  ggplot() +
+    geom_sf(data = map_data, aes_string(fill = attribute)) +
+    scale_fill_gradient(low = "lightgrey", high = "purple", 
+                        limits = c(global_min, global_max),
+                        name = "Automobile-Thefts") +
+    labs(title = year) +
+    theme_minimal() + 
+    theme(
+      axis.title.x = element_blank(),
+      axis.text.x = element_blank(),
+      axis.ticks.x = element_blank(),
+      axis.title.y = element_blank(),
+      axis.text.y = element_blank(),
+      axis.ticks.y = element_blank()
+    )
+}
+
+plot1 <- create_plot("AUTOTHE25", "2014")
+plot2 <- create_plot("AUTOTHE26", "2015")
+plot3 <- create_plot("AUTOTHE27", "2016")
+plot4 <- create_plot("AUTOTHE28", "2017")
+plot5 <- create_plot("AUTOTHE29", "2018")
+plot6 <- create_plot("AUTOTHE30", "2019")
+plot7 <- create_plot("AUTOTHE31", "2020")
+plot8 <- create_plot("AUTOTHE32", "2021")
+plot9 <- create_plot("AUTOTHE33", "2022")
+plot10 <- create_plot("AUTOTHE34", "2023")
+
+plot_layout <- (plot1 + plot2 + plot3 + plot4 + plot5 + plot6 + plot7 + plot8 + plot9 + plot10)
+```
+
+```{r}
+ggsave("combined_plots.png", plot_layout, width = 20, height = 10, units = "cm")
+```
+
+# Discussion
+
+## First discussion point {#sec-first-point}
+
+If my paper were 10 pages, then should be be at least 2.5 pages. The discussion is a chance to show off what you know and what you learnt from all this. 
+
+## Second discussion point
+
+
+## Third discussion point
+
+## Weaknesses and next steps
+
+Weaknesses and next steps should also be included.
+
+\newpage
+
+\appendix
+
+# Appendix {-}
+
+
+
+\newpage
+
+
+# References
+
+
