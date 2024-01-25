@@ -1,13 +1,12 @@
 ---
-title: "My title"
-subtitle: "My subtitle if needed"
+title: "Analyzing the Dynamics of Automobile Theft in Toronto"
+subtitle: "A Decade of Surge in Comparison to Other Crimes, with a Focus on Persistent Spatial Disparities."
 author: 
-  - First author
-  - Another author
-thanks: "Code and data are available at: LINK."
-date: today
+  - Sima Shmuylovich
+thanks: "Code and data are available at: https://github.com/sshmuylovich/toronto-automobile-theft.git."
+date: 25 January 2024
 date-format: long
-abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
+abstract: This paper investigates the changing landscape of automobile theft in Toronto over the past decade, comparing its growth to that of other crimes. Notably, this paper explores the intriguing phenomenon that despite the significant increase in automobile theft's prevalence, it has not expanded to encompass new neighborhoods.
 format: pdf
 toc: true
 number-sections: true
@@ -19,7 +18,7 @@ bibliography: references.bib
 #| warning: false
 #| message: false
 #### Preamble ####
-# Purpose: ....
+# Purpose: Output a PDF that tells a story about Automobile Theft in Toronto using graphs and tables for support. 
 # Author: Sima Shmuylovich
 # Date: 25 January 2024
 # Contact: sima.shmuylovich@mail.utoronto.ca
@@ -43,8 +42,14 @@ library("sf")
 library("patchwork")
 ```
 
-
 # Introduction
+**Introduction**
+
+Toronto, Canada's largest city, has witnessed various transformations in its urban landscape over the past decade. With these changes, the city's crime dynamics, particularly pertaining to automobile theft, have evolved. This paper presents a comprehensive analysis of automobile theft in Toronto from 2014 to 2023, offering a comparison with the progression of other major crimes during the same period. These include assault, bike theft, break and enter, robbery, shooting, homicide, and theft from a motor vehicle. The study also explores the geographical distribution of automobile theft across Toronto's neighborhoods, providing insights into spatial trends and patterns. 
+
+The broader context of this study is rooted in understanding urban crime dynamics and their implications for public safety and policy formulation. Our research aims to provide an analysis of automobile theft, its evolution over time, and its interplay with other crime categories in Toronto. The study reveals that while overall crime rates in Toronto have shown varied trends, automobile theft has ...
+
+The findings of this study are significant for several reasons. Firstly, they provide a nuanced understanding of how automobile theft, as a specific crime category, fits into the broader context of urban crime in Toronto. Secondly, the spatial analysis of crime distribution aids in identifying areas that require focused policing and community intervention. Finally, this research contributes to the academic discourse on urban criminology, offering valuable insights for policymakers, law enforcement agencies, and urban planners. The paper is structured as follows: following this introduction, the second section provides a review of relevant literature. The third section details the methodology, followed by a presentation and discussion of the findings in the fourth section. The paper concludes with implications for policy and suggestions for future research.
 
 # Data {#sec-data}
 
@@ -54,9 +59,40 @@ library("patchwork")
 #| warning: false
 #| message: false
 
+# Read in Automobile Thefts Data
+automobile_thefts_data <- read_csv("../data/cleaned_automobile_thefts_data.csv")
+
+# Read in Map Data
 map_data <- readRDS("../data/cleaned_map_data.rds") 
 map_data_csv <- read_csv("../data/cleaned_map_data.csv") %>%
   filter(!is.na(num_automobile_thefts))
+
+# Read in All Crime Thefts Data
+all_crime_data <- read_csv("../data/cleaned_all_crime_data.csv")
+```
+
+### Automobile Theft Across All of Toronto Over the Past Decade (2014-2023) {#sec-location}
+With auto theft having reached 'historic highs' for Ontario in 2022, this paper investigated how many vehicles were stolen in Toronto, Ontario's largest city, annually over the past decade. The following data was obtained:
+
+```{r}
+#| label: tbl-autothefttable
+#| tbl-cap: The number of motor vehicles reported stolen each year from 2014 to 2023.
+#| echo: false
+#| warning: false
+#| message: false
+
+automobile_thefts_data %>% rename (
+    "Year" = year,
+    "Number of Automobile Thefts" = num_automobile_thefts
+  ) %>%
+  head() %>%
+  kable() 
+```
+
+```{r}
+#| include: false
+#| warning: false
+#| message: false
 
 global_min <- min(map_data_csv$num_automobile_thefts)
 global_max<- max(map_data_csv$num_automobile_thefts)
@@ -89,12 +125,6 @@ plot7 <- create_plot("AUTOTHE31", "2020")
 plot8 <- create_plot("AUTOTHE32", "2021")
 plot9 <- create_plot("AUTOTHE33", "2022")
 plot10 <- create_plot("AUTOTHE34", "2023")
-
-plot_layout <- (plot1 + plot2 + plot3 + plot4 + plot5 + plot6 + plot7 + plot8 + plot9 + plot10)
-```
-
-```{r}
-ggsave("combined_plots.png", plot_layout, width = 20, height = 10, units = "cm")
 ```
 
 # Discussion
@@ -104,7 +134,6 @@ ggsave("combined_plots.png", plot_layout, width = 20, height = 10, units = "cm")
 If my paper were 10 pages, then should be be at least 2.5 pages. The discussion is a chance to show off what you know and what you learnt from all this. 
 
 ## Second discussion point
-
 
 ## Third discussion point
 
