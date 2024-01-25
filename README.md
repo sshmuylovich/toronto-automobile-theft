@@ -13,3 +13,6 @@ The repo is structured as:
 
 # LLM Usage Statement
 **None of the components of this work involved the use of LLMs.**
+
+# Note
+I cannot git push from the PostIt Cloud or my local hard drive. Previous commits can be found in the git-log text file.
