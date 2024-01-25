@@ -6,7 +6,7 @@ author:
 thanks: "Code and data are available at: https://github.com/sshmuylovich/toronto-automobile-theft.git."
 date: 25 January 2024
 date-format: long
-abstract: This paper investigates the changing landscape of automobile theft in Toronto over the past decade, comparing its growth to that of other crimes. Notably, this paper explores the intriguing phenomenon that despite the significant increase in automobile theft's prevalence, it has not expanded to encompass new neighborhoods.
+abstract: This paper investigates the changing landscape of automobile theft in Toronto over the past decade, comparing its growth to that of other crimes. Notably, this paper explores the intriguing phenomenon that despite the significant increase in automobile theft's prevalence, it has not expanded to encompass new neighborhoods. This paper aims to provide an in-depth analysis of automobile theft, its evolution over time, and its interplay with other crime categories as well as geography in Toronto. In a broader context, this research contributes to the academic discourse on urban criminology and offers valuable insights for policymakers, law enforcement agencies, and urban planners.
 format: pdf
 toc: true
 number-sections: true
